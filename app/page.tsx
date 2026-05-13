@@ -1,197 +1,184 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const categorias = [
   {
     nombre: "Chocotejas",
-    slug: "chocotejas",
     imagen: "/chocotejas.png",
+    ruta: "/categoria/chocotejas",
   },
   {
     nombre: "Gomitas",
-    slug: "gomitas",
     imagen: "/gomitas.png",
+    ruta: "/categoria/gomitas",
   },
   {
     nombre: "Brownies",
-    slug: "brownies",
     imagen: "/brownies.png",
+    ruta: "/categoria/brownies",
   },
   {
     nombre: "Tortas",
-    slug: "tortas",
     imagen: "/tortas.png",
+    ruta: "/categoria/tortas",
   },
   {
     nombre: "Accesorios",
-    slug: "accesorios",
     imagen: "/bong.png",
+    ruta: "/categoria/accesorios",
   },
 ];
 
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-black text-white">
+      
+      {/* EFECTOS VERDES */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-green-500/20 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-green-500/20 blur-3xl" />
+      </div>
 
       {/* NAVBAR */}
-      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b border-white/10 bg-black/70 px-6 py-5 backdrop-blur-xl">
+      <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+          
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="Tripzy"
+              width={55}
+              height={55}
+              className="rounded-full"
+            />
 
-        <h1 className="text-3xl font-black tracking-tight text-green-200">
-          TripzyShop
-        </h1>
+            <span className="text-3xl font-black tracking-wider text-green-200">
+              TripzyShop
+            </span>
+          </div>
 
-        <div className="flex gap-8 text-sm font-medium text-gray-300">
-          <a href="#inicio" className="transition hover:text-green-300">
-            Inicio
-          </a>
+          <nav className="flex items-center gap-8 text-sm text-gray-300">
+            <a href="#inicio" className="transition hover:text-green-300">
+              Inicio
+            </a>
 
-          <a href="#catalogo" className="transition hover:text-green-300">
-            Catálogo
-          </a>
+            <a href="#catalogo" className="transition hover:text-green-300">
+              Catálogo
+            </a>
 
-          <a href="#contacto" className="transition hover:text-green-300">
-            Contacto
-          </a>
+            <a href="#contacto" className="transition hover:text-green-300">
+              Contacto
+            </a>
+          </nav>
         </div>
-      </nav>
+      </header>
 
       {/* HERO */}
       <section
         id="inicio"
-        className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 text-center"
+        className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center"
       >
-
-        {/* EFECTOS */}
-        <div className="absolute left-[-140px] top-[-140px] h-[420px] w-[420px] rounded-full bg-green-500/20 blur-3xl" />
-
-        <div className="absolute bottom-[-140px] right-[-140px] h-[420px] w-[420px] rounded-full bg-emerald-700/20 blur-3xl" />
-
+        
         {/* HOJAS */}
-        <img
+        <Image
           src="/weed.png"
           alt="weed"
-          className="absolute left-12 top-28 w-16 rotate-[-18deg] opacity-20"
+          width={180}
+          height={180}
+          className="absolute left-10 top-40 rotate-[-20deg] opacity-20"
         />
 
-        <img
+        <Image
           src="/weed.png"
           alt="weed"
-          className="absolute left-40 top-52 w-10 rotate-[12deg] opacity-10"
+          width={140}
+          height={140}
+          className="absolute bottom-32 right-16 rotate-[20deg] opacity-20"
         />
 
-        <img
-          src="/weed.png"
-          alt="weed"
-          className="absolute right-16 top-36 w-14 rotate-[20deg] opacity-20"
-        />
-
-        <img
-          src="/weed.png"
-          alt="weed"
-          className="absolute right-44 top-72 w-12 rotate-[-10deg] opacity-10"
-        />
-
-        <img
-          src="/weed.png"
-          alt="weed"
-          className="absolute left-24 bottom-28 w-14 rotate-[15deg] opacity-15"
-        />
-
-        <img
-          src="/weed.png"
-          alt="weed"
-          className="absolute right-20 bottom-24 w-16 rotate-[-20deg] opacity-15"
-        />
-
-        {/* CONTENIDO */}
-        <motion.div
-          initial={{ opacity: 0, y: 70 }}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="relative z-10"
+          className="z-10 text-7xl font-black uppercase tracking-widest text-green-200 md:text-[170px]"
+          style={{
+            textShadow:
+              "0px 0px 25px rgba(34,197,94,0.35)",
+          }}
         >
+          TRIPZY
+        </motion.h1>
 
-          <h1 className="bg-gradient-to-r from-green-300 via-white to-emerald-400 bg-clip-text text-7xl font-black tracking-[-0.08em] text-transparent drop-shadow-2xl md:text-9xl">
-            TRIPZY
-          </h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="z-10 mt-6 max-w-2xl text-xl text-gray-400"
+        >
+          Catálogo premium de brownies, chocotejas,
+          gomitas, tortas y accesorios.
+        </motion.p>
 
-          <p className="mx-auto mt-8 max-w-2xl text-xl text-gray-400">
-            Catálogo premium de brownies, chocotejas,
-            gomitas, tortas y accesorios.
-          </p>
-
-          <a
-            href="#catalogo"
-            className="mt-10 inline-block rounded-full bg-green-300 px-10 py-4 font-bold text-black transition hover:scale-105 hover:bg-green-200"
-          >
-            Ver catálogo
-          </a>
-
-        </motion.div>
+        <motion.a
+          href="#catalogo"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="z-10 mt-10 rounded-full bg-green-300 px-10 py-4 text-lg font-bold text-black transition hover:bg-green-200"
+        >
+          Ver catálogo
+        </motion.a>
       </section>
 
       {/* CATALOGO */}
       <section
         id="catalogo"
-        className="px-6 py-28"
+        className="mx-auto max-w-7xl px-6 py-32"
       >
-
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center text-6xl font-black"
-        >
+        <h2 className="text-center text-6xl font-black">
           Catálogo
-        </motion.h2>
+        </h2>
 
-        <p className="mt-6 text-center text-gray-400">
-          Selecciona una categoría para entrar a su página.
+        <p className="mt-5 text-center text-gray-400">
+          Selecciona una categoría para entrar.
         </p>
 
-        <div className="mx-auto mt-20 grid max-w-7xl gap-10 md:grid-cols-2 xl:grid-cols-3">
-
+        <div className="mt-20 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+          
           {categorias.map((categoria, index) => (
             <motion.div
-              key={categoria.slug}
-              initial={{ opacity: 0, y: 70 }}
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
+              transition={{ duration: 0.5 }}
             >
-              <Link href={`/categoria/${categoria.slug}`}>
-
-                <div className="group relative overflow-hidden rounded-[35px] border border-white/10 bg-gradient-to-b from-zinc-900 to-black transition duration-500 hover:scale-[1.03] hover:border-green-400/30">
-
-                  <div className="absolute inset-0 bg-green-400/0 transition duration-500 group-hover:bg-green-400/5" />
-
-                  <div className="relative flex h-[320px] flex-col items-center justify-center p-10 text-center">
-
+              <Link href={categoria.ruta}>
+                <div className="group overflow-hidden rounded-[35px] border border-white/10 bg-[#050505] transition hover:border-green-400/40 hover:shadow-[0_0_30px_rgba(34,197,94,0.2)]">
+                  
+                  <div className="relative h-[280px] overflow-hidden">
                     <Image
                       src={categoria.imagen}
                       alt={categoria.nombre}
-                      width={120}
-                      height={120}
-                      className="mb-8 object-contain drop-shadow-2xl transition duration-500 group-hover:scale-110"
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-110"
                     />
+                  </div>
 
-                    <h3 className="text-5xl font-black tracking-tight">
+                  <div className="p-8">
+                    <h3 className="text-4xl font-black">
                       {categoria.nombre}
                     </h3>
 
-                    <p className="mt-4 text-lg text-gray-400">
+                    <p className="mt-3 text-lg text-gray-400">
                       Entrar a categoría
                     </p>
-
                   </div>
                 </div>
-
               </Link>
             </motion.div>
           ))}
-
         </div>
       </section>
 
@@ -200,8 +187,7 @@ export default function Home() {
         id="contacto"
         className="px-6 py-32 text-center"
       >
-
-        <h2 className="text-7xl font-black">
+        <h2 className="text-6xl font-black">
           Contacto
         </h2>
 
@@ -209,118 +195,84 @@ export default function Home() {
           Pedidos personalizados, catálogo premium y atención directa.
         </p>
 
-        <div className="mx-auto mt-20 flex max-w-6xl flex-wrap items-center justify-center gap-8">
-
-          {/* INSTAGRAM */}
+        <div className="mt-16 flex flex-wrap items-center justify-center gap-10">
+          
           <a
             href="https://www.instagram.com/tripzy_420/"
             target="_blank"
-            className="flex items-center gap-4 rounded-2xl border border-white/10 bg-zinc-900 px-8 py-5 transition hover:border-pink-400/40 hover:bg-zinc-800"
+            className="flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-6 py-4 transition hover:border-pink-400 hover:bg-white/10"
           >
             <Image
               src="/instagram.png"
               alt="Instagram"
-              width={42}
-              height={42}
-              className="object-contain"
+              width={35}
+              height={35}
             />
 
-            <div className="text-left">
-              <p className="text-sm text-gray-400">
-                Instagram
-              </p>
-
-              <p className="text-lg font-semibold">
-                @tripzy_420
-              </p>
-            </div>
+            <span className="text-lg font-semibold">
+              Instagram
+            </span>
           </a>
 
-          {/* TIKTOK */}
           <a
             href="https://www.tiktok.com/@tripzy420"
             target="_blank"
-            className="flex items-center gap-4 rounded-2xl border border-white/10 bg-zinc-900 px-8 py-5 transition hover:border-white/30 hover:bg-zinc-800"
+            className="flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-6 py-4 transition hover:border-white hover:bg-white/10"
           >
             <Image
               src="/tiktok.png"
               alt="TikTok"
-              width={42}
-              height={42}
-              className="object-contain"
+              width={35}
+              height={35}
             />
 
-            <div className="text-left">
-              <p className="text-sm text-gray-400">
-                TikTok
-              </p>
-
-              <p className="text-lg font-semibold">
-                @tripzy420
-              </p>
-            </div>
+            <span className="text-lg font-semibold">
+              TikTok
+            </span>
           </a>
 
-          {/* TELEGRAM */}
           <a
             href="https://t.me/Perucho_Fit/"
             target="_blank"
-            className="flex items-center gap-4 rounded-2xl border border-white/10 bg-zinc-900 px-8 py-5 transition hover:border-blue-400/40 hover:bg-zinc-800"
+            className="flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-6 py-4 transition hover:border-blue-400 hover:bg-white/10"
           >
             <Image
               src="/telegram.png"
               alt="Telegram"
-              width={42}
-              height={42}
-              className="object-contain"
+              width={35}
+              height={35}
             />
 
-            <div className="text-left">
-              <p className="text-sm text-gray-400">
-                Telegram
-              </p>
-
-              <p className="text-lg font-semibold">
-                TripzyShop
-              </p>
-            </div>
+            <span className="text-lg font-semibold">
+              Telegram
+            </span>
           </a>
 
-          {/* WHATSAPP */}
           <a
             href="https://wa.me/51922167377"
             target="_blank"
-            className="flex items-center gap-4 rounded-2xl border border-white/10 bg-zinc-900 px-8 py-5 transition hover:border-green-400/40 hover:bg-zinc-800"
+            className="flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-6 py-4 transition hover:border-green-400 hover:bg-white/10"
           >
             <Image
               src="/whatsapp.png"
               alt="WhatsApp"
-              width={42}
-              height={42}
-              className="object-contain"
+              width={35}
+              height={35}
             />
 
-            <div className="text-left">
-              <p className="text-sm text-gray-400">
-                WhatsApp
-              </p>
-
-              <p className="text-lg font-semibold">
-                +51 922 167 377
-              </p>
-            </div>
+            <span className="text-lg font-semibold">
+              WhatsApp
+            </span>
           </a>
-
         </div>
 
-        <p className="mt-16 text-gray-500">
-         Perú
+        <p className="mt-12 text-gray-500">
+          Arequipa, Perú
         </p>
 
-        <p className="mt-6 text-gray-700">
-          Todos los derechos reservados - TripzyShop © 2026
+        <p className="mt-20 text-gray-700">
+          TripzyShop © 2026
         </p>
-
       </section>
     </main>
   );
