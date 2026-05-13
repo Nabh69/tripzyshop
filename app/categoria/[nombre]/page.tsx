@@ -76,9 +76,15 @@ export default function CategoriaPage() {
                 S/ {product.precio}
               </p>
 
-              <button className="mt-6 rounded-full bg-white px-5 py-2 font-bold text-black">
+              <a
+              href="https://wa.me/51922167377?text=Hola,%20quiero%20hacer%20un%20pedido%20en%20Tripzy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block rounded-full bg-white px-5 py-2 font-bold text-black hover:bg-[#7CFF8A] transition"
+              >
                 Pedir ahora
-              </button>
+                </a>
+
             </div>
           </motion.div>
         ))}
