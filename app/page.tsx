@@ -16,15 +16,61 @@ const categorias = [
 function WeedLeaves({ theme }: { theme: string }) {
   const weedImage = theme === "green" ? "/weed.png" : "/weed-purple.png";
 
+  const leaves = [
+    "left-6 top-24 w-24 -rotate-[20deg]",
+    "left-[18%] top-[34%] w-14 rotate-[15deg]",
+    "right-8 top-28 w-20 rotate-[20deg]",
+    "right-[16%] bottom-32 w-16 -rotate-[12deg]",
+    "left-8 bottom-28 w-20 rotate-[15deg]",
+    "right-10 bottom-20 w-24 -rotate-[20deg]",
+  ];
+
   return (
     <>
-      <Image src={weedImage} alt="" width={130} height={130} className="absolute left-8 top-28 -rotate-[20deg] opacity-20" />
-      <Image src={weedImage} alt="" width={90} height={90} className="absolute left-[18%] top-[38%] rotate-[15deg] opacity-20" />
-      <Image src={weedImage} alt="" width={110} height={110} className="absolute right-8 top-32 rotate-[20deg] opacity-20" />
-      <Image src={weedImage} alt="" width={85} height={85} className="absolute right-[18%] bottom-32 -rotate-[12deg] opacity-20" />
-      <Image src={weedImage} alt="" width={120} height={120} className="absolute left-10 bottom-28 rotate-[15deg] opacity-20" />
-      <Image src={weedImage} alt="" width={130} height={130} className="absolute right-10 bottom-24 -rotate-[20deg] opacity-20" />
+      {leaves.map((className, index) => (
+        <motion.img
+          key={index}
+          src={weedImage}
+          alt=""
+          animate={{ y: [0, -14, 0], rotate: [0, 4, 0] }}
+          transition={{
+            duration: 5 + index,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className={`pointer-events-none absolute opacity-20 ${className}`}
+        />
+      ))}
     </>
+  );
+}
+
+function Particles({ theme }: { theme: string }) {
+  const color = theme === "green" ? "bg-green-300" : "bg-purple-400";
+
+  return (
+    <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
+      {[...Array(18)].map((_, index) => (
+        <motion.span
+          key={index}
+          className={`absolute h-1.5 w-1.5 rounded-full ${color}`}
+          style={{
+            left: `${(index * 17) % 100}%`,
+            top: `${(index * 23) % 100}%`,
+          }}
+          animate={{
+            opacity: [0.1, 0.7, 0.1],
+            scale: [1, 1.8, 1],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 4 + (index % 5),
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -44,6 +90,18 @@ export default function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTheme((current) => {
+        const nextTheme = current === "green" ? "purple" : "green";
+        localStorage.setItem("tripzy-theme", nextTheme);
+        return nextTheme;
+      });
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const isGreen = theme === "green";
 
   const mainColor = isGreen ? "text-green-200" : "text-purple-300";
@@ -58,31 +116,37 @@ export default function Home() {
     ? "hover:shadow-[0_0_30px_rgba(34,197,94,0.25)]"
     : "hover:shadow-[0_0_30px_rgba(168,85,247,0.25)]";
   const glowColor = isGreen
-    ? "rgba(34,197,94,0.4)"
-    : "rgba(168,85,247,0.45)";
+    ? "rgba(34,197,94,0.45)"
+    : "rgba(168,85,247,0.5)";
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-black text-white">
+    <main className="relative min-h-screen overflow-hidden bg-black text-white transition-colors duration-700">
+      <Particles theme={theme} />
 
-      {/* EFECTOS DE FONDO */}
+      {/* FONDO NEÓN */}
       <div className="pointer-events-none fixed inset-0 z-0">
-        <div
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15] }}
+          transition={{ duration: 6, repeat: Infinity }}
           className={`absolute left-0 top-0 h-[500px] w-[500px] rounded-full blur-3xl ${
             isGreen ? "bg-green-500/20" : "bg-purple-500/20"
           }`}
         />
 
-        <div
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
+          transition={{ duration: 7, repeat: Infinity }}
           className={`absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full blur-3xl ${
             isGreen ? "bg-green-500/20" : "bg-purple-500/20"
           }`}
         />
+
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent,black_75%)]" />
       </div>
 
       {/* NAVBAR */}
       <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-
           <div className="flex items-center gap-3">
             <Image
               src="/logo.png"
@@ -99,15 +163,16 @@ export default function Home() {
           </div>
 
           <nav className="hidden items-center gap-8 text-sm text-gray-300 md:flex">
-            <a href="#inicio" className={`transition hover:${mainColor}`}>
-              Inicio
-            </a>
-            <a href="#catalogo" className={`transition hover:${mainColor}`}>
-              Catálogo
-            </a>
-            <a href="#contacto" className={`transition hover:${mainColor}`}>
-              Contacto
-            </a>
+            <a href="#inicio" className="transition hover:text-white">Inicio</a>
+            <a href="#catalogo" className="transition hover:text-white">Catálogo</a>
+            <a href="#contacto" className="transition hover:text-white">Contacto</a>
+
+            <button
+              onClick={() => setTheme(isGreen ? "purple" : "green")}
+              className={`rounded-full px-4 py-2 text-sm font-bold text-black transition ${buttonColor}`}
+            >
+              Cambiar color
+            </button>
           </nav>
 
           <button
@@ -126,6 +191,16 @@ export default function Home() {
               <a href="#inicio" onClick={() => setMenuOpen(false)}>Inicio</a>
               <a href="#catalogo" onClick={() => setMenuOpen(false)}>Catálogo</a>
               <a href="#contacto" onClick={() => setMenuOpen(false)}>Contacto</a>
+
+              <button
+                onClick={() => {
+                  setTheme(isGreen ? "purple" : "green");
+                  setMenuOpen(false);
+                }}
+                className={`rounded-full px-4 py-3 font-bold text-black ${buttonColor}`}
+              >
+                Cambiar color
+              </button>
             </div>
           </nav>
         )}
@@ -143,9 +218,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className={`relative z-10 text-7xl font-black uppercase tracking-widest md:text-[170px] ${mainColor}`}
-          style={{
-            textShadow: `0px 0px 30px ${glowColor}`,
-          }}
+          style={{ textShadow: `0px 0px 35px ${glowColor}` }}
         >
           TRIPZY
         </motion.h1>
